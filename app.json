@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "FichaTecnica2.0",
-    "slug": "FichaTecnica2.0",
-    "version": "1.0.0",
+    "name": "Gerencie sua cozinha 2.0",
+    "slug": "FichaTecnica2",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -23,7 +23,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.nutriinterativa.gerenciesuacozinha",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
