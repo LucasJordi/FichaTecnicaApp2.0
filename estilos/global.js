@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     input:{
       borderBottomWidth:1,
       borderColor:"#fdb800ff",
-      width:"120%",
+      width:"100%",
       fontSize:20
     },
     inputicon:{

@@ -1,7 +1,7 @@
 import  React,{useState,useEffect,useContext} from 'react';
 import {styles} from '../estilos/global';
-
-import { View,SafeAreaView,Alert,Button,ScrollView,TextInput,StyleSheet,Text,Image} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { View,SafeAreaView,Alert,Button,Dimensions,ImageBackground,ScrollView,Platform,TextInput,StyleSheet,Text,Image} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
 import {Barra} from '../globais/barra';
@@ -14,11 +14,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export function Adiconarestoque({ navigation }) {
+    const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
     const[selectunidade,setselect]=useState('unidade');
     const[selectunidade2,setselect2]=useState('unidade');
     const[selectunidade3,setselect3]=useState('unidade');
     const[nome,setnome]=useState('');
-    
+    const[imagem,setimagem]=useState('//');
+    const[tem,settem]=useState(false)
     const[marca,setmarca]=useState('');
     const[quantidade,setquantidade]=useState('');
     const[pesounidade,setpesounidade]=useState('');
@@ -27,7 +29,22 @@ export function Adiconarestoque({ navigation }) {
     const[num,setnumero]=useState();
     const [user,setuser] =useState();
     
-
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+            
+          setimagem(result.uri);
+          settem(true)
+        }
+      };
     function cadastrarestoque(userId) {
         
         firebase
@@ -45,7 +62,8 @@ export function Adiconarestoque({ navigation }) {
             pesounidade:pesounidade,
             custounidade:custo.replace(',','.'),
             estoqueminimo:estoqueminimo.replace(',','.'),
-            imagem:'../imagens/unknow3.png'
+            imagem:imagem
+            
 
             
 
@@ -62,12 +80,23 @@ export function Adiconarestoque({ navigation }) {
             setestoqueminimo('');
             setnumero();
             setuser();
+            setimagem('');
+            
+            settem(false)
             
           Alert.alert('Item cadastrado')
           navigation.goBack()
 
     }
     useEffect(()=>{
+        (async () => {
+            if (Platform.OS !== 'web') {
+              const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+              if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+              }
+            }
+          })();
         const pegarasync= async()=>{
             try{
                 const usuario = await AsyncStorage.getItem('@usuario')
@@ -98,11 +127,13 @@ export function Adiconarestoque({ navigation }) {
             <ScrollView>
               
                 <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <View style={[styles1.view]}>
+                    <TouchableOpacity onPress={()=>pickImage()} style={[styles1.view]}>
                        
-                        <Image  source={require('../imagens/unknow3.png')} />
+                        <ImageBackground style={{width:345,height:157}}  source={require('../imagens/unknow3.png')} >
+                            <Image style={{width:345,height:157}} source={{uri:imagem}}/>
+                        </ImageBackground>
                     
-                    </View>
+                    </TouchableOpacity>
 
                     
                     
@@ -160,7 +191,7 @@ export function Adiconarestoque({ navigation }) {
                 </View>
 
                 <View style={styles1.view}>
-                    <Text >Peso do pacote por unidade (De acordo com a unidade utilizada em receita informada acima.)</Text>
+                    <Text >De acordo com a unidade utilizada em receita informada acima, infome a quantidade por unidade informada. Exemplo:1 caixa de ovo tem 30 unidades, um pacote de farinha 1000g e etc...</Text>
                     <TextInput value={pesounidade} keyboardType='numeric' onChangeText={(value)=> setpesounidade(value)} placeholder='Ex.:Um pacote de farinha tem 5kg' style={[styles1.view2,{width:'90%'}]}/>
                 
                 </View>

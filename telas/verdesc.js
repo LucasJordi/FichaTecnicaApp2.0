@@ -1,7 +1,7 @@
 import  React,{useState,useEffect} from 'react';
 import {styles} from '../estilos/global'
-
-import { View,SafeAreaView,Button,Alert,ScrollView,TextInput,StyleSheet,Text,Image} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { View,SafeAreaView,Button,Alert,ScrollView,ImageBackground,TextInput,StyleSheet,Text,Image} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {firebase} from '../firebase/config';
 import {Barra} from '../globais/barra'
@@ -12,10 +12,27 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export function Verdesc({ navigation,route }) {
     const { item } = route.params;
     const[select,setselect]=useState('');
+    const [imagem,setimagem]=useState('/');
     const [nome,setnome]=useState('');
     const [quantidade,setquantidade]=useState('');
     const [valor,setvalor]=useState('');
     const [user,setuser]=useState();
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+            
+          setimagem(result.uri);
+          
+        }
+      };
     const deletar= async()=>{
         try{
             const usuario= await AsyncStorage.getItem('@usuario')
@@ -40,7 +57,7 @@ export function Verdesc({ navigation,route }) {
             unidade: select,
            
             custounidade:valor.replace(',','.'),
-            imagem:'../imagens/unknow3.png'
+            imagem:imagem
             
 
             
@@ -58,6 +75,14 @@ export function Verdesc({ navigation,route }) {
     }
     
     useEffect(()=>{
+        (async () => {
+            if (Platform.OS !== 'web') {
+              const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+              if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+              }
+            }
+          })();
         const pegarasync= async()=>{
             try{
                 const usuario = await AsyncStorage.getItem('@usuario')
@@ -72,6 +97,7 @@ export function Verdesc({ navigation,route }) {
         setquantidade(item.quantidade)
         setselect(item.unidade)
         setvalor(item.valor)
+        setimagem(item.imagem)
 
     },[item])
     return (
@@ -83,11 +109,13 @@ export function Verdesc({ navigation,route }) {
             <ScrollView>
               
                 <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <View style={[styles1.view]}>
-                       
-                        <Image  source={require('../imagens/unknow3.png')} />
+                    <TouchableOpacity onPress={()=>pickImage()} style={[styles1.view]}>
+                       <ImageBackground style={{width:345,height:157}}  source={require('../imagens/unknow3.png')}>
+                            <Image style={{width:345,height:157}} source={{uri:imagem}} />    
+                       </ImageBackground>
+                        
                     
-                    </View>
+                    </TouchableOpacity>
 
                     
                     

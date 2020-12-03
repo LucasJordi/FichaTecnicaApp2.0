@@ -1,8 +1,8 @@
 import React,{useState,useContext,useEffect, Children} from 'react';
 import {styles} from '../estilos/global'
 
-import { View,FlatList,TextInput,StyleSheet,Alert,Text,Image,LogBox} from 'react-native';
-
+import { View,FlatList,TextInput,StyleSheet,ImageBackground,Dimensions,Alert,Text,Image,LogBox} from 'react-native';
+import exampleimg from '../imagens/imageunk2.png'
 import {firebase} from '../firebase/config'
 import {Barra} from '../globais/barra'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -14,6 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function Estoque({ navigation }) {
     const [estoquemat,setestoquemat]=useState();
+    const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
     const {plano,plan,fire,user3}=useContext(Armazenamento)
     const [length,setlength]=useState()
     const [user,setuser]=useState( )
@@ -120,6 +121,7 @@ export function Estoque({ navigation }) {
        
         
     },[plan])
+    
     return (
       <View style={styles.container}>
         <Barra name={()=>navigation.openDrawer()}/>
@@ -142,7 +144,7 @@ export function Estoque({ navigation }) {
             </View>
             
 
-            <View style={{marginVertical:"10%"}}>
+            <View style={{marginVertical:"5%"}}>
                 <TextInput placeholder='Procurar...' style={{borderColor:'#6d6d6dff',fontSize:20,borderBottomWidth:1,height:25,paddingBottom:-10}} />
 
             
@@ -152,9 +154,9 @@ export function Estoque({ navigation }) {
                 <Text>{'Valor total do estoque: R$ '+totalvalor()}</Text>
             </View>
 
-            <View style={{height:'80%',width:'200%'}}>
+            <View style={{height:'80%',}}>
                 
-                <View style={{height:'70%'}}>
+                <View style={{height:'65%',justifyContent:'center'}}>
 
                 
                     <FlatList
@@ -162,8 +164,13 @@ export function Estoque({ navigation }) {
                         numColumns={2}
                         keyExtractor={item => item.id}
                         renderItem={({item})=>(
-                            <TouchableOpacity onPress={()=> navigation.navigate('Ver estoque',{item})} style={{width:'100%',marginHorizontal:'1%',marginVertical:"2%"}}>
-                                <Image style={{resizeMode:'contain'}} source={require('../imagens/imageunk2.png')} />
+                            <TouchableOpacity onPress={()=> navigation.navigate('Ver estoque',{item})} style={{width:146,marginHorizontal:'1%',marginVertical:"5%"}}>
+                                
+                                <ImageBackground style={{width:146,height:111}} source={require('../imagens/imageunk2.png')}>
+                                 <Image style={{width:146,height:111}} source={{uri:item.imagem}} />
+                                </ImageBackground>
+                                
+                                
                                 <Text style={{width:140}}>{item.nome}</Text>
 
                             </TouchableOpacity>

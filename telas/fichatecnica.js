@@ -1,7 +1,7 @@
 import React,{useState,useContext,useEffect} from 'react';
 import {styles} from '../estilos/global'
 
-import { View,Pressable,FlatList,TextInput,StyleSheet,Alert,Text,Image,LogBox} from 'react-native';
+import { View,Pressable,FlatList,TextInput,ImageBackground,StyleSheet,Alert,Text,Image,LogBox} from 'react-native';
 import {firebase} from '../firebase/config'
 
 import {Barra} from '../globais/barra'
@@ -60,7 +60,8 @@ export function Ficha({ navigation }) {
                             porcoes: child.val().porcoes,
                             custoporporc: child.val().custoporporc,
                             custoporkg: child.val().custoporkg,
-                            ingredientes:child.val().ingredientes
+                            ingredientes:child.val().ingredientes,
+                            imagem:child.val().imagem
                     })
                 })
                 
@@ -119,7 +120,12 @@ export function Ficha({ navigation }) {
                         keyExtractor={item => item.id}
                         renderItem={({item})=>(
                             <TouchableOpacity  onPress={()=>navigation.navigate('Ver ficha',{item})} style={{width:'100%',marginHorizontal:'1%',marginVertical:"2%"}}>
-                                <Image style={{resizeMode:'contain'}} source={require('../imagens/imageunk2.png')} />
+                                
+                                <ImageBackground style={{alignItems:"center",justifyContent:'center',width:146,height:111}} source={require('../imagens/imageunk2.png')}>
+                                    <Image style={{width:146,height:111}} source={{uri:item.imagem}} />
+                                </ImageBackground>
+                                
+                                
                                 <Text style={{width:140}}>{item.nomedareceita +'      R$ '+item.custodareceita.replace('.',',')}</Text>
 
                             </TouchableOpacity>

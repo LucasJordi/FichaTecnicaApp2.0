@@ -1,7 +1,7 @@
 import  React,{useState,useContext,useEffect} from 'react';
 import {styles} from '../estilos/global'
-
-import { View,FlatList,Alert,Modal,Button,TouchableHighlight,ScrollView,TextInput,StyleSheet,LogBox,Text,Image} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { View,FlatList,Alert,Modal,Button,TouchableHighlight,ImageBackground,ScrollView,TextInput,StyleSheet,LogBox,Text,Image} from 'react-native';
 import {firebase} from '../firebase/config'
 
 import {Barra} from '../globais/barra'
@@ -13,19 +13,36 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export function Adicionarficha({ navigation }) {
-    const[select,setselect]=useState('')
-    const[openmodal,setmodalopen]=useState(false)
-    const [quantidadereceita,setquantidadereceita]=useState(0)
-    const [pesopreparacao,setpreparacao]=useState('')
-    const [pesoporc,setporc]=useState('')
-    const {plan,fire,user3}=useContext(Armazenamento)
-    const [nomereceita,setnomereceita]=useState('')
+    const[select,setselect]=useState('');
+    const[openmodal,setmodalopen]=useState(false);
+    const [quantidadereceita,setquantidadereceita]=useState(0);
+    const [pesopreparacao,setpreparacao]=useState('');
+    const [pesoporc,setporc]=useState('');
+    const {plan,fire,user3}=useContext(Armazenamento);
+    const [nomereceita,setnomereceita]=useState('');
+    const[imagem,setimagem]=useState('/');
     
     const [estoquemat,setestoquemat]=useState('');
     const [ficha,setficha]=useState([]);
     var li=[]
     var valortotal=[]
     const [user,setuser]=useState('')
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+            
+          setimagem(result.uri);
+          
+        }
+      };
     const total=()=>{
         var tot=0
         
@@ -81,6 +98,14 @@ export function Adicionarficha({ navigation }) {
     }
     
     useEffect(()=>{
+        (async () => {
+            if (Platform.OS !== 'web') {
+              const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+              if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+              }
+            }
+          })();
         
          const base=async()=>{
             
@@ -125,7 +150,8 @@ export function Adicionarficha({ navigation }) {
             porcoes: numeroporc(),
             custoporporc: custoporc(),
             custoporkg: custokg(),
-            ingredientes:ficha
+            ingredientes:ficha,
+            imagem:imagem
 
 
 
@@ -137,6 +163,7 @@ export function Adicionarficha({ navigation }) {
           setporc('')
           setnomereceita('')
           setficha('')
+          setimagem('/')
           
           
           
@@ -207,11 +234,14 @@ export function Adicionarficha({ navigation }) {
                 {
                 <>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <View style={[styles1.view]}>
+                        <TouchableOpacity onPress={()=>pickImage()} style={[styles1.view]}>
+                            <ImageBackground  style={{width:345,height:157}} source={require('../imagens/unknow3.png')}>
+                                <Image style={{width:345,height:157}} source={{uri:imagem}} />
+                            </ImageBackground>
                         
-                            <Image  source={require('../imagens/unknow3.png')} />
+                            
                         
-                        </View>
+                        </TouchableOpacity>
 
                         
                         

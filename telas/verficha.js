@@ -1,7 +1,7 @@
 import  React,{useState,useContext,useEffect} from 'react';
 import {styles} from '../estilos/global'
-
-import { View,FlatList,Alert,Modal,Button,TouchableHighlight,ScrollView,TextInput,StyleSheet,LogBox,Text,Image} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { View,FlatList,Alert,Modal,Button,TouchableHighlight,ImageBackground,ScrollView,TextInput,StyleSheet,LogBox,Text,Image} from 'react-native';
 import {firebase} from '../firebase/config'
 
 import {Barra} from '../globais/barra'
@@ -23,9 +23,28 @@ export function Verficha({ navigation,route }) {
     const {plan,user3,fire}=useContext(Armazenamento)
     const [estoquemat,setestoquemat]=useState();
     const [ficha,setficha]=useState([]);
+    const[imagem,setimagem]=useState('/');
+    const [imagem2,setimagem2]=useState()
     var li=[]
     var valortotal=[]
-    const [user,setuser]=useState()
+    const [user,setuser]=useState();
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+            
+          setimagem(result.uri);
+          
+        }
+      };
+
     const deletarficha= async ()=>{
         try{
            navigation.goBack()
@@ -91,6 +110,14 @@ export function Verficha({ navigation,route }) {
     }
     
     useEffect(()=>{
+        (async () => {
+            if (Platform.OS !== 'web') {
+              const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+              if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+              }
+            }
+          })();
         
          const base=async()=>{
             const usuario = await AsyncStorage.getItem('@usuario')
@@ -118,12 +145,20 @@ export function Verficha({ navigation,route }) {
             LogBox.ignoreLogs(['Setting a timer']);
             
 
-        })}
-        base()
+        })};
+        base();
         
-        setpreparacao(item.pesoprepara)
-        setporc(item.pesodaporc)
-        setnomereceita(item.nomedareceita)
+        setpreparacao(item.pesoprepara);
+        setporc(item.pesodaporc);
+        setnomereceita(item.nomedareceita);
+        setimagem(()=>{
+            if(item.imagem){
+                return item.imagem
+            }else{
+                
+                return '/'
+            }
+        })
         
         
         setficha(item.ingredientes);
@@ -142,7 +177,8 @@ export function Verficha({ navigation,route }) {
             porcoes: numeroporc(),
             custoporporc: custoporc(),
             custoporkg: custokg(),
-            ingredientes:ficha
+            ingredientes:ficha,
+            imagem:imagem
 
 
 
@@ -218,11 +254,13 @@ export function Verficha({ navigation,route }) {
                 {
                 <>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <View style={[styles1.view]}>
+                        <TouchableOpacity onPress={()=>pickImage()} style={[styles1.view]}>
+                            <ImageBackground style={{width:345,height:157}} source={require('../imagens/unknow3.png')}>
+                                <Image style={{width:345,height:157}}  source={{uri:imagem}} />
+                            </ImageBackground>
+                            
                         
-                            <Image  source={require('../imagens/unknow3.png')} />
-                        
-                        </View>
+                        </TouchableOpacity>
 
                         
                         

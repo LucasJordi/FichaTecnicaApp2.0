@@ -1,7 +1,7 @@
 import  React,{useState,Component,useEffect,useContext} from 'react';
 import {styles} from '../estilos/global'
-
-import { View,Alert,Button,ScrollView,TextInput,StyleSheet,Text,Image} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { View,Alert,Button,ScrollView,TextInput,TouchableOpacity,StyleSheet,Text,Image} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 
 import {Barra} from '../globais/barra'
@@ -10,6 +10,7 @@ import {Armazenamento} from '../contexto/context';
 import {firebase} from '../firebase/config'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ImageBackground from 'react-native/Libraries/Image/ImageBackground';
 
 
 export function Verestoque({ navigation,route }) {
@@ -27,8 +28,24 @@ export function Verestoque({ navigation,route }) {
     const[custo,setcusto]=useState();
     const[estoqueminimo,setestoqueminimo]=useState();
     const[num,setnumero]=useState();
+    const[imagem,setimagem]=useState();
+    const[tem,settem]=useState(false)
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
     
+        console.log(result);
     
+        if (!result.cancelled) {
+            
+          setimagem(result.uri);
+          settem(true)
+        }
+      };
     const deletar= async()=>{
         try{
             const usuario= await AsyncStorage.getItem('@usuario')
@@ -43,6 +60,14 @@ export function Verestoque({ navigation,route }) {
         Alert.alert(nome)
     }
     useEffect(()=>{
+        (async () => {
+            if (Platform.OS !== 'web') {
+              const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+              if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+              }
+            }
+          })();
         const base=async()=>{
             const usuario = await AsyncStorage.getItem('@usuario')
             setuser(usuario)
@@ -58,6 +83,7 @@ export function Verestoque({ navigation,route }) {
         setpesounidade(item.pesounidade);
         setcusto(item.custounidade);
         setestoqueminimo(item.estoqueminimo);
+        setimagem(item.imagem)
     
         
     },[item])
@@ -78,7 +104,7 @@ export function Verestoque({ navigation,route }) {
             pesounidade:pesounidade,
             custounidade:custo,
             estoqueminimo:estoqueminimo,
-            imagem:'../imagens/unknow3.png'
+            imagem:imagem
 
             
 
@@ -106,11 +132,13 @@ export function Verestoque({ navigation,route }) {
             <ScrollView>
               
                 <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <View style={[styles1.view]}>
-                       
-                        <Image  source={require('../imagens/unknow3.png')} />
+                    <TouchableOpacity onPress={()=>pickImage()} style={[styles1.view]}>
+                       <ImageBackground style={{width:345,height:157,justifyContent:'center',alignItems:'center'}} source={require('../imagens/unknow3.png')}>
+                        <Image style={{width:345,height:157}} source={{uri:imagem}} />
+                       </ImageBackground>
+                        
                     
-                    </View>
+                    </TouchableOpacity>
 
                     
                     

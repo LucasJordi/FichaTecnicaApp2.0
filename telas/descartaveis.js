@@ -1,7 +1,7 @@
 import React,{useState,useContext,useEffect} from 'react';
 import {styles} from '../estilos/global'
 
-import { View,TextInput,Alert,StyleSheet,FlatList,Text,Image,LogBox} from 'react-native';
+import { View,TextInput,Alert,StyleSheet,ImageBackground,FlatList,Text,Image,LogBox} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {firebase} from '../firebase/config'
 import {Barra} from '../globais/barra'
@@ -114,8 +114,13 @@ export function Descartaveis({ navigation }) {
                         numColumns={2}
                         keyExtractor={item => item.id}
                         renderItem={({item})=>(
-                            <TouchableOpacity onPress={()=> navigation.navigate('Ver descartavel',{item})} style={{width:'100%',marginHorizontal:'1%',marginVertical:"2%"}}>
-                                <Image style={{resizeMode:'contain'}} source={require('../imagens/imageunk2.png')} />
+                            <TouchableOpacity onPress={()=> navigation.navigate('Ver descartavel',{item})} style={{width:146,marginHorizontal:'2%',marginVertical:"5%"}}>
+                                
+                                <ImageBackground style={{width:146,height:111}} source={require('../imagens/imageunk2.png')}>
+                                    <Image style={{width:146,height:111}} source={{uri:item.imagem}} />
+
+                                </ImageBackground>
+                                
                                 <Text style={{width:140}}>{item.nome}</Text>
 
                             </TouchableOpacity>

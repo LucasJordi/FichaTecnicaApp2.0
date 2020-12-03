@@ -1,7 +1,7 @@
 import React,{useContext,useState,useEffect} from 'react';
 import {styles} from '../estilos/global'
 
-import { ScrollView,Alert,StyleSheet,View,Text,Image,LogBox} from 'react-native';
+import { ScrollView,Alert,Dimensions,StyleSheet,View,Text,Image,LogBox} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {firebase} from "../firebase/config"
 
@@ -11,7 +11,7 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
 export function Cadastro({ navigation }) {
     const [nome,setnome]=useState('')
-    
+    const { width: windowWidth, height: windowHeight } = Dimensions.get("window");
     const [sobrenome,setsobrenome]=useState('')
     const [email,setemail]=useState('')
     const [senha,setsenha]=useState('')
@@ -104,16 +104,16 @@ export function Cadastro({ navigation }) {
     return (
       
       
-        <View style={[{justifyContent:"center",top:"1%",alignItems:"center",backgroundColor:"#00ccffff",width:"100%",height:"300%"},styles.container]}>
+        <View style={[{justifyContent:"flex-start",top:"1%",alignItems:"center",backgroundColor:"#00ccffff",width:windowWidth,height:"300%"},styles.container]}>
             <Image source={require('../imagens/fazcadastro.png')} />
-            <ScrollView style={{width:"60%"}}>
+            <ScrollView style={{width:windowWidth*0.8}}>
                 
                 <View style={{alignItems:"center",marginVertical:"20%"}}>
                   <Text style={styles.login}>Cadastrar</Text>
                 </View>
                
 
-                    <View style={{alignItems:"flex-start",justifyContent:"flex-start",height:"70%",width:"120%"}}>
+                    <View style={{alignItems:"flex-start",justifyContent:"flex-start",height:"70%",width:windowWidth}}>
                         
 
                         

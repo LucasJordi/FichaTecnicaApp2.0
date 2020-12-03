@@ -87,7 +87,7 @@ export function Inicial({ navigation }) {
                 )}
             </View>
           
-            <View style={{position:'absolute',justifyContent:'center',alignItems:'center',width:'100%',bottom:90}} >
+            <View style={{position:'absolute',justifyContent:'center',alignItems:'center',width:'100%',bottom:'5%'}} >
                
                 <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')} style={{justifyContent:"center",width:150,height:50, borderWidth:1,borderColor:'white'}}>
                                 <Text style={{textAlign:"center",color:'white'}}>CRIAR CONTA</Text>
