@@ -1,7 +1,7 @@
 import React,{useContext,useState,useEffect} from 'react';
 import {styles} from '../estilos/global'
 
-import { ScrollView,Alert,Dimensions,StyleSheet,View,Text,Image,LogBox} from 'react-native';
+import { ScrollView,Alert,Dimensions,StyleSheet,ImageBackground,View,Text,Image,LogBox} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {firebase} from "../firebase/config"
 
@@ -105,7 +105,10 @@ export function Cadastro({ navigation }) {
       
       
         <View style={[{justifyContent:"flex-start",top:"1%",alignItems:"center",backgroundColor:"#00ccffff",width:windowWidth,height:"300%"},styles.container]}>
-            <Image source={require('../imagens/fazcadastro.png')} />
+            <ImageBackground style={{width:windowWidth,height:250,top:'-10%',justifyContent:'center'}} source={require('../imagens/fazcadastro.png')} >
+                <Text style={styles2.text}>Olá!</Text>
+                <Text style={styles2.text}>Faça seu login!</Text>
+            </ImageBackground>
             <ScrollView style={{width:windowWidth*0.8}}>
                 
                 <View style={{alignItems:"center",marginVertical:"20%"}}>
@@ -214,6 +217,14 @@ const styles2 = StyleSheet.create({
         width:"100%",
         fontSize:20
       },
+      text:{
+        fontSize:25,
+        color:'white',
+        fontWeight:'bold',
+        marginLeft:'2%',
+        top:'15%'
+    }
+
 
 })
 

@@ -1,7 +1,7 @@
 import React,{useContext,useEffect,useState} from 'react';
 import {styles} from '../estilos/global'
 
-import { Alert,StyleSheet,Dimensions,View,Text,Image,LogBox} from 'react-native';
+import { Alert,StyleSheet,Dimensions,ImageBackground,View,Text,Image,LogBox} from 'react-native';
 import {firebase} from "../firebase/config"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -84,10 +84,13 @@ export function Login({ navigation }) {
     return (
       
       
-        <View style={[{alignItems:"center",justifyContent:'flex-start',backgroundColor:"white",width:windowWidth,height:2000},styles.container]}>
-            <Image  source={require('../imagens/fazlogin.png')} />
-            <View style={{width:windowWidth,justifyContent:'center',alignItems:'center'}}>
-                <View style={{alignItems:"center",marginVertical:"10%"}}>
+        <View style={[styles.container,{alignItems:"center",justifyContent:'flex-start',backgroundColor:"white",width:windowWidth,height:2000}]}>
+            <ImageBackground style={{width:windowWidth,justifyContent:"center",top:'-5%',flex:1,height:250,resizeMode:'contain'}} source={require('../imagens/fazlogin.png')} >
+                <Text style={styles2.text}>Olá!</Text>
+                <Text style={styles2.text}>Faça seu login!</Text>
+            </ImageBackground>
+            <View style={{width:windowWidth,justifyContent:'center',flex:4,alignItems:'center'}}>
+                <View style={{alignItems:"center",marginVertical:"2%"}}>
                   <Text style={styles.login}>Login</Text>
                 </View>
 
@@ -141,7 +144,15 @@ const styles2 = StyleSheet.create({
     },
     entrar:{
         fontSize:20
+    },
+    text:{
+        fontSize:25,
+        color:'white',
+        fontWeight:'bold',
+        marginLeft:'2%',
+        top:'25%'
     }
+
 })
 
 
