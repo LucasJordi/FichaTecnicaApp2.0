@@ -1,9 +1,15 @@
 import * as React from 'react';
 import {styles} from '../estilos/global'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View,Modal,TextInput,StyleSheet,Text,Image,LogBox} from 'react-native';
+import { View,Modal,TextInput,StyleSheet,Dimensions,Text,Image,LogBox} from 'react-native';
 import {firebase} from '../firebase/config'
-
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded,
+  setTestDeviceIDAsync,
+} from 'expo-ads-admob';
 import {Barra} from '../globais/barra'
 
 
@@ -49,7 +55,7 @@ export function Minhaconta({ navigation }) {
 
             <View style={styles1.view}>
                 <Text >Nome </Text>
-                <TextInput  value={nome} style={{height: 40,fontSize: 20,marginTop:'2%',borderColor:'gray',borderBottomWidth:1}}/>
+                <TextInput  value={nome} style={{height: 40,width:Dimensions.get('window').width*0.7,fontSize: 20,marginTop:'2%',borderColor:'gray',borderBottomWidth:1}}/>
                
             </View>
             <View style={styles1.view}>
@@ -59,12 +65,12 @@ export function Minhaconta({ navigation }) {
             </View>
             <View style={styles1.view}>
                 <Text >Email</Text>
-                <TextInput value={email} style={{height: 40,fontSize: 20,marginTop:'2%',borderColor:'gray',borderBottomWidth:1}}/>
+                <TextInput value={email} style={{height: 40,width:Dimensions.get('window').width*0.7,fontSize: 20,marginTop:'2%',borderColor:'gray',borderBottomWidth:1}}/>
                
             </View>
             <View style={styles1.view}>
                 <Text >Nome do negócio</Text>
-                <TextInput value={nomenegocio} style={{height: 40,fontSize: 20,marginTop:'2%',borderColor:'gray',borderBottomWidth:1}}/>
+                <TextInput value={nomenegocio} style={{height: 40,width:Dimensions.get('window').width*0.7,fontSize: 20,marginTop:'2%',borderColor:'gray',borderBottomWidth:1}}/>
                
             </View>
             <View style={styles1.view}>
@@ -72,9 +78,23 @@ export function Minhaconta({ navigation }) {
                 <TextInput value={todos} style={{height: 40,width:'30%',fontSize: 20,marginTop:'2%',borderColor:'gray',borderBottomWidth:1}}/>
                
             </View>
+            <View style={[styles.ads,{marginTop:"2%"}]}>
+              <AdMobBanner
+              bannerSize="fullBanner"
+              adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                />
+            </View>
 
         </View>
+        
+          
+        
+              
+                              
+                              
+                          
       </View>
+      
     );
 }
 

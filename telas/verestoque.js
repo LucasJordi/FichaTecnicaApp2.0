@@ -3,7 +3,13 @@ import {styles} from '../estilos/global'
 import * as ImagePicker from 'expo-image-picker';
 import { View,Alert,Button,ScrollView,TextInput,TouchableOpacity,StyleSheet,Text,Image} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+  } from 'expo-ads-admob';
 import {Barra} from '../globais/barra'
 
 import {Armazenamento} from '../contexto/context';
@@ -237,6 +243,12 @@ export function Verestoque({ navigation,route }) {
                         onPress={()=>Alert.alert('Deseja salvar as alterações?','',[{text:'Sim',onPress:()=>atualizar(user)},{text:'Cancelar'}])}
                     />
                     
+                </View>
+                <View style={[styles.ads,{marginTop:"7%"}]}>
+                    <AdMobBanner
+                    bannerSize="fullBanner"
+                    adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                        />
                 </View>
             
             </ScrollView>    

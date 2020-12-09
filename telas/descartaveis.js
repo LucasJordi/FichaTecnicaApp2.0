@@ -1,6 +1,12 @@
 import React,{useState,useContext,useEffect} from 'react';
 import {styles} from '../estilos/global'
-
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+  } from 'expo-ads-admob';
 import { View,TextInput,Alert,StyleSheet,ImageBackground,FlatList,Text,Image,LogBox} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {firebase} from '../firebase/config'
@@ -110,6 +116,20 @@ export function Descartaveis({ navigation }) {
 
                 
                     <FlatList
+                        ListFooterComponent={
+                            <>
+                              <View style={styles.ads}>
+                                <AdMobBanner
+                                bannerSize="fullBanner"
+                                adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                                 />
+                              </View>
+                             
+              
+                              
+                              
+                            </>
+                          }
                         data={estoquemat}
                         numColumns={2}
                         keyExtractor={item => item.id}

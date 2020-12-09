@@ -1,6 +1,12 @@
 import React,{useState,useContext,useEffect} from 'react';
 import {styles} from '../estilos/global'
-
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+  } from 'expo-ads-admob';
 import { View,Pressable,FlatList,TextInput,ImageBackground,StyleSheet,Alert,Text,Image,LogBox} from 'react-native';
 import {firebase} from '../firebase/config'
 
@@ -115,6 +121,20 @@ export function Ficha({ navigation }) {
 
                 
                     <FlatList
+                        ListFooterComponent={
+                            <>
+                              <View style={styles.ads}>
+                                <AdMobBanner
+                                bannerSize="fullBanner"
+                                adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                                 />
+                              </View>
+                             
+              
+                              
+                              
+                            </>
+                          }
                         data={fichas}
                         numColumns={2}
                         keyExtractor={item => item.id}

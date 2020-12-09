@@ -3,7 +3,13 @@ import {styles} from '../estilos/global'
 import * as ImagePicker from 'expo-image-picker';
 import { View,FlatList,Alert,Modal,Button,TouchableHighlight,ImageBackground,ScrollView,TextInput,StyleSheet,LogBox,Text,Image} from 'react-native';
 import {firebase} from '../firebase/config'
-
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+  } from 'expo-ads-admob';
 import {Barra} from '../globais/barra'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Armazenamento} from '../contexto/context'
@@ -211,6 +217,20 @@ export function Verficha({ navigation,route }) {
                 <View style={{top:20,width:'100%',height:"50%"}}>
                     
                     <FlatList 
+                        ListFooterComponent={
+                            <>
+                              <View style={[styles.ads,{marginTop:"7%"}]}>
+                                <AdMobBanner
+                                bannerSize="fullBanner"
+                                adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                                 />
+                              </View>
+                             
+              
+                              
+                              
+                            </>
+                          }
                         data={estoquemat}
                         keyExtractor={item=>item.id}
                         renderItem={({item})=>(
@@ -250,6 +270,20 @@ export function Verficha({ navigation,route }) {
 
         <View style={styles1.scroll}>
             <FlatList  
+                ListFooterComponent={
+                    <>
+                      <View style={[styles.ads,{marginTop:"7%"}]}>
+                        <AdMobBanner
+                        bannerSize="fullBanner"
+                        adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                         />
+                      </View>
+                     
+      
+                      
+                      
+                    </>
+                  }
                 ListHeaderComponent=
                 {
                 <>

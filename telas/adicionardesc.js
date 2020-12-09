@@ -7,7 +7,13 @@ import {firebase} from '../firebase/config';
 import {Barra} from '../globais/barra'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {
+  AdMobBanner,
+  AdMobInterstitial,
+  PublisherBanner,
+  AdMobRewarded,
+  setTestDeviceIDAsync,
+} from 'expo-ads-admob';
 
 export function Adicionardescart({ navigation }) {
     const[select,setselect]=useState('');
@@ -154,7 +160,13 @@ export function Adicionardescart({ navigation }) {
                     </TouchableOpacity>
                    
                 </View>
-            
+                <View style={[{marginTop:"7%"},styles.ads]}>
+                  <AdMobBanner
+                  bannerSize="fullBanner"
+                  adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                  />
+                </View>
+
             </ScrollView>    
         </View>
 

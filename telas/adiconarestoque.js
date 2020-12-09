@@ -3,7 +3,13 @@ import {styles} from '../estilos/global';
 import * as ImagePicker from 'expo-image-picker';
 import { View,SafeAreaView,Alert,Button,Dimensions,ImageBackground,ScrollView,Platform,TextInput,StyleSheet,Text,Image} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+  } from 'expo-ads-admob';
 import {Barra} from '../globais/barra';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Armazenamento} from '../contexto/context';
@@ -230,6 +236,18 @@ export function Adiconarestoque({ navigation }) {
                         onPress={()=>cadastrarestoque(user)}
                     />
                 </View>
+                
+                <View style={[styles.ads,{marginTop:"7%"}]}>
+                    <AdMobBanner
+                    bannerSize="fullBanner"
+                    adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                        />
+                </View>
+                             
+              
+                              
+                              
+                           
             
             </ScrollView>    
         </View>

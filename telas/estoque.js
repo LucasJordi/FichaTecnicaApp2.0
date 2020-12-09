@@ -1,6 +1,12 @@
 import React,{useState,useContext,useEffect, Children} from 'react';
 import {styles} from '../estilos/global'
-
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+  } from 'expo-ads-admob';
 import { View,FlatList,TextInput,StyleSheet,ImageBackground,Dimensions,Alert,Text,Image,LogBox} from 'react-native';
 import exampleimg from '../imagens/imageunk2.png'
 import {firebase} from '../firebase/config'
@@ -154,12 +160,26 @@ export function Estoque({ navigation }) {
                 <Text>{'Valor total do estoque: R$ '+totalvalor()}</Text>
             </View>
 
-            <View style={{height:'80%',}}>
+            <View style={{height:Dimensions.get('window').height,width:Dimensions.get('window').width}}>
                 
-                <View style={{height:'65%',justifyContent:'center'}}>
+                <View style={{height:Dimensions.get('window').height,justifyContent:'center',}}>
 
                 
                     <FlatList
+                        ListFooterComponent={
+                            <>
+                              <View style={styles.ads}>
+                                <AdMobBanner
+                                bannerSize="fullBanner"
+                                adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                                 />
+                              </View>
+                             
+              
+                              
+                              
+                            </>
+                          }
                         data={estoquemat}
                         numColumns={2}
                         keyExtractor={item => item.id}

@@ -1,6 +1,12 @@
 import  React,{useState,useContext,useEffect} from 'react';
 import {styles} from '../estilos/global'
-
+import {
+    AdMobBanner,
+    AdMobInterstitial,
+    PublisherBanner,
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+  } from 'expo-ads-admob';
 import { View,FlatList,Alert,Modal,Button,TouchableHighlight,ScrollView,TextInput,StyleSheet,LogBox,Text,Image} from 'react-native';
 import {firebase} from '../firebase/config'
 
@@ -154,6 +160,20 @@ export function Adicionarproduto({ navigation }) {
                 <View style={{top:20,width:'100%',height:"50%"}}>
                     
                     <FlatList 
+                        ListFooterComponent={
+                            <>
+                              <View style={[styles.ads,{marginTop:"7%"}]}>
+                                <AdMobBanner
+                                bannerSize="fullBanner"
+                                adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                                 />
+                              </View>
+                             
+              
+                              
+                              
+                            </>
+                          }
                         data={estoquemat}
                         keyExtractor={item=>item.id}
                         renderItem={({item})=>(
@@ -193,6 +213,20 @@ export function Adicionarproduto({ navigation }) {
 
         <View style={styles1.scroll}>
             <FlatList  
+                ListFooterComponent={
+                    <>
+                      <View style={[styles.ads,{marginTop:"7%"}]}>
+                        <AdMobBanner
+                        bannerSize="fullBanner"
+                        adUnitID="ca-app-pub-3107661564294379/9507690326" // Test ID, Replace with your-admob-unit-id
+                         />
+                      </View>
+                     
+      
+                      
+                      
+                    </>
+                  }
                 ListHeaderComponent=
                 {
                 <>
