@@ -2,13 +2,13 @@
   "expo": {
     "name": "Gerencie sua cozinha 2.0",
     "slug": "FichaTecnica2",
-    "version": "8.0.0",
+    "version": "9.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#00CCFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,8 +25,8 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.nutriinterativa.fichatecnica",
-      "versionCode": 8,
-      "permissions":["CAMERA"],
+      "versionCode": 9,
+      "permissions":["CAMERA","READ_EXTERNAL_STORAGE"],
       "config": {
        
         "googleMobileAdsAppId": "ca-app-pub-3107661564294379~1587347014" 
