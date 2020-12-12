@@ -162,7 +162,7 @@ export function Estoque({ navigation }) {
 
             <View style={{height:Dimensions.get('window').height,width:Dimensions.get('window').width}}>
                 
-                <View style={{height:Dimensions.get('window').height,justifyContent:'center',}}>
+                <View style={{height:Dimensions.get('window').height*0.7,justifyContent:'center',}}>
 
                 
                     <FlatList

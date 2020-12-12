@@ -14,7 +14,7 @@ import {Barra} from '../globais/barra'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Armazenamento} from '../contexto/context'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import Constants from 'expo-constants';
 
 
 

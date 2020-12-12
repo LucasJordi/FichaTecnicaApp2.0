@@ -2,7 +2,8 @@ import  React,{useState,useContext,useEffect} from 'react';
 import {styles} from '../estilos/global'
 import * as ImagePicker from 'expo-image-picker';
 import { View,FlatList,Alert,Modal,Button,TouchableHighlight,ImageBackground,ScrollView,TextInput,StyleSheet,LogBox,Text,Image} from 'react-native';
-import {firebase} from '../firebase/config'
+import {firebase} from '../firebase/config';
+import Constants from 'expo-constants';
 import {
     AdMobBanner,
     AdMobInterstitial,
@@ -41,7 +42,7 @@ export function Adicionarficha({ navigation }) {
           quality: 1,
         });
     
-        console.log(result);
+        
     
         if (!result.cancelled) {
             

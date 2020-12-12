@@ -10,7 +10,8 @@ import {
     AdMobRewarded,
     setTestDeviceIDAsync,
   } from 'expo-ads-admob';
-import {Barra} from '../globais/barra'
+import {Barra} from '../globais/barra';
+import Constants from 'expo-constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {Armazenamento} from '../contexto/context'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -42,7 +43,7 @@ export function Verficha({ navigation,route }) {
           quality: 1,
         });
     
-        console.log(result);
+        
     
         if (!result.cancelled) {
             

@@ -4,6 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { View,SafeAreaView,Button,Alert,ScrollView,ImageBackground,TextInput,StyleSheet,Text,Image} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {firebase} from '../firebase/config';
+import Constants from 'expo-constants';
 import {Barra} from '../globais/barra'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -31,7 +32,7 @@ export function Verdesc({ navigation,route }) {
           quality: 1,
         });
     
-        console.log(result);
+        
     
         if (!result.cancelled) {
             

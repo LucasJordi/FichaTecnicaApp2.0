@@ -7,7 +7,7 @@ import {
     AdMobRewarded,
     setTestDeviceIDAsync,
   } from 'expo-ads-admob';
-import { View,Pressable,FlatList,TextInput,ImageBackground,StyleSheet,Alert,Text,Image,LogBox} from 'react-native';
+import { View,Pressable,FlatList,TextInput,Dimensions,ImageBackground,StyleSheet,Alert,Text,Image,LogBox} from 'react-native';
 import {firebase} from '../firebase/config'
 
 import {Barra} from '../globais/barra'
@@ -117,7 +117,7 @@ export function Ficha({ navigation }) {
 
 
 
-            <View style={{height:'70%'}}>
+            <View style={{height:Dimensions.get('window').height*0.7}}>
 
                 
                     <FlatList

@@ -7,7 +7,7 @@ import {
     AdMobRewarded,
     setTestDeviceIDAsync,
   } from 'expo-ads-admob';
-import { View,FlatList,TextInput,StyleSheet,Text,Alert,Image,LogBox} from 'react-native';
+import { View,FlatList,TextInput,Dimensions,StyleSheet,Text,Alert,Image,LogBox} from 'react-native';
 
 import {firebase} from '../firebase/config'
 import {Barra} from '../globais/barra'
@@ -131,9 +131,9 @@ export function Produtos({ navigation }) {
                 <Text>{'Valor total do estoque: R$ '+totalvalor()}</Text>
             </View>
 
-            <View style={{height:'80%',width:'200%'}}>
+            <View style={{height:Dimensions.get('window').height,width:'200%'}}>
                 
-                <View style={{height:'70%'}}>
+                <View style={{height:Dimensions.get('window').height*0.7}}>
 
                 
                     <FlatList

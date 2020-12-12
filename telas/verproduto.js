@@ -1,5 +1,6 @@
 import  React,{useState,useContext,useEffect} from 'react';
-import {styles} from '../estilos/global'
+import {styles} from '../estilos/global';
+import Constants from 'expo-constants';
 import {
     AdMobBanner,
     AdMobInterstitial,

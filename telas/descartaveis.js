@@ -7,7 +7,7 @@ import {
     AdMobRewarded,
     setTestDeviceIDAsync,
   } from 'expo-ads-admob';
-import { View,TextInput,Alert,StyleSheet,ImageBackground,FlatList,Text,Image,LogBox} from 'react-native';
+import { View,TextInput,Alert,StyleSheet,Dimensions,ImageBackground,FlatList,Text,Image,LogBox} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {firebase} from '../firebase/config'
 import {Barra} from '../globais/barra'
@@ -110,9 +110,9 @@ export function Descartaveis({ navigation }) {
 
 
 
-            <View style={{height:'80%',width:'200%'}}>
+            <View style={{height:Dimensions.get('window').height,width:'200%'}}>
                 
-                <View style={{height:'70%'}}>
+                <View style={{height:Dimensions.get('window').height*0.7}}>
 
                 
                     <FlatList

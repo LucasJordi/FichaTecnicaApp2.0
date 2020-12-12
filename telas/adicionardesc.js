@@ -1,5 +1,6 @@
 import  React,{useState,useEffect} from 'react';
 import {styles} from '../estilos/global'
+import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import { View,SafeAreaView,Button,Alert,ImageBackground,ScrollView,TextInput,StyleSheet,Text,Image} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
@@ -30,7 +31,7 @@ export function Adicionardescart({ navigation }) {
           quality: 1,
         });
     
-        console.log(result);
+        
     
         if (!result.cancelled) {
             

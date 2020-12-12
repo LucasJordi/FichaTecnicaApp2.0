@@ -3,6 +3,7 @@ import {styles} from '../estilos/global'
 import * as ImagePicker from 'expo-image-picker';
 import { View,Alert,Button,ScrollView,TextInput,TouchableOpacity,StyleSheet,Text,Image} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+import Constants from 'expo-constants';
 import {
     AdMobBanner,
     AdMobInterstitial,
@@ -44,7 +45,7 @@ export function Verestoque({ navigation,route }) {
           quality: 1,
         });
     
-        console.log(result);
+        
     
         if (!result.cancelled) {
             
