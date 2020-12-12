@@ -107,7 +107,7 @@ export function Cadastro({ navigation }) {
         <View style={[{justifyContent:"flex-start",top:"1%",alignItems:"center",backgroundColor:"#00ccffff",width:windowWidth,height:"300%"},styles.container]}>
             <ImageBackground style={{width:windowWidth,height:250,top:'-10%',justifyContent:'center'}} source={require('../imagens/fazcadastro.png')} >
                 <Text style={styles2.text}>Olá!</Text>
-                <Text style={styles2.text}>Faça seu login!</Text>
+                <Text style={styles2.text}>Faça seu cadastro!</Text>
             </ImageBackground>
             <ScrollView style={{width:windowWidth*0.8}}>
                 
