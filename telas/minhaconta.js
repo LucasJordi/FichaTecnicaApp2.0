@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {styles} from '../estilos/global'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { View,Modal,TextInput,StyleSheet,Dimensions,Text,Image,LogBox} from 'react-native';
+import { View,Modal,TextInput,TouchableOpacity,StyleSheet,Dimensions,Text,Image,LogBox} from 'react-native';
 import {firebase} from '../firebase/config'
 import {
   AdMobBanner,
@@ -14,11 +14,13 @@ import {Barra} from '../globais/barra'
 
 
 
+
 export function Minhaconta({ navigation }) {
   const [nome,setnome]=React.useState()
   const [nomenegocio,setnomenegocio]=React.useState()
   const [email,setemail]=React.useState()
   const [todos,settodos]=React.useState()
+  const [modal,setmodal]=React.useState(false)
   
   
 
@@ -78,6 +80,34 @@ export function Minhaconta({ navigation }) {
                 <TextInput value={todos} style={{height: 40,width:'30%',fontSize: 20,marginTop:'2%',borderColor:'gray',borderBottomWidth:1}}/>
                
             </View>
+            <View style={styles1.view}>
+              <TouchableOpacity onPress={()=> setmodal(!modal)}>
+                <Text style={{fontSize:20}} >Mudar senha</Text>
+              </TouchableOpacity>
+                
+                  <Modal
+                    animationType="slide"
+                    
+                    visible={modal}
+                  > 
+                    <View style={{alignItems:"center",justifyContent:'center',height:Dimensions.get('window').height*0.8}}>
+                      <Text>Digite a senha atual</Text>
+                      <TextInput style={styles1.modal} placeholder={"Digite sua senha..."}/>
+                      <Text>Digite uma nova senha</Text>                
+                      <TextInput style={styles1.modal} placeholder={"Digite sua senha..."}/>
+                      <Text>Confirme a nova senha</Text>
+                      <TextInput style={styles1.modal} placeholder={"Digite sua senha..."}/>
+                      <TouchableOpacity onPress={()=> setmodal(!modal)} style={{borderRadius:5,marginVertical:"2%",alignItems:"center",backgroundColor:"blue",width:150,height:30}}>
+                        <Text style={{fontSize:20,color:"white"}}>Sair</Text>
+                      </TouchableOpacity>
+                    </View>
+                    
+
+                  </Modal>
+
+                
+               
+            </View>
             <View style={[styles.ads,{marginTop:"2%"}]}>
               <AdMobBanner
               bannerSize="fullBanner"
@@ -105,6 +135,12 @@ export function Minhaconta({ navigation }) {
       
       
     },
+    modal:{
+      fontSize:25,
+      height:60
+    
+      
+    }
    
   });  
 

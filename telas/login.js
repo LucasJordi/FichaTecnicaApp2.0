@@ -1,11 +1,11 @@
 import React,{useContext,useEffect,useState} from 'react';
 import {styles} from '../estilos/global'
 
-import { Alert,StyleSheet,Dimensions,ImageBackground,KeyboardAvoidingView,View,Text,Image,LogBox} from 'react-native';
+import { Alert,StyleSheet,Dimensions,ImageBackground, TextInput, TouchableOpacity ,KeyboardAvoidingView,View,Text,Image,LogBox} from 'react-native';
 import {firebase} from "../firebase/config"
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { PanGestureHandler, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+
 
 import Armazenamento from '../contexto/context';
 

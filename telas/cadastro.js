@@ -1,11 +1,11 @@
 import React,{useContext,useState,useEffect} from 'react';
 import {styles} from '../estilos/global'
 
-import { ScrollView,Alert,Dimensions,StyleSheet,ImageBackground,View,Text,Image,LogBox} from 'react-native';
+import { ScrollView,Alert,Dimensions,TextInput, TouchableOpacity,StyleSheet,ImageBackground,View,Text,Image,LogBox} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {firebase} from "../firebase/config"
 
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+
 
 
 
@@ -104,7 +104,7 @@ export function Cadastro({ navigation }) {
     return (
       
       
-        <View style={[{justifyContent:"flex-start",top:"1%",alignItems:"center",backgroundColor:"#00ccffff",width:windowWidth,height:"300%"},styles.container]}>
+        <View style={[{justifyContent:"flex-start",top:"1%",alignItems:"center",backgroundColor:"#00ccffff",width:windowWidth,height:windowHeight},styles.container]}>
             <ImageBackground style={{width:windowWidth,height:250,top:'-10%',justifyContent:'center'}} source={require('../imagens/fazcadastro.png')} >
                 <Text style={styles2.text}>Olá!</Text>
                 <Text style={styles2.text}>Faça seu cadastro!</Text>
@@ -142,7 +142,7 @@ export function Cadastro({ navigation }) {
                         <View style={styles2.form}>
                             <Text>Email</Text>
                             <View style={{flexDirection:"row"}}>
-                                <TextInput keyboardType="email-address" onChangeText={(value)=>{setemail(value.toLowerCase())}} style={styles2.input}/>
+                                <TextInput  onChangeText={(value)=>{setemail(value.toLowerCase())}} style={styles2.input}/>
                                 <Image style={styles.inputicon} source={require('../imagens/email.png')} />
                             </View>
 

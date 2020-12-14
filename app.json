@@ -2,7 +2,7 @@
   "expo": {
     "name": "Gerencie sua cozinha 2.0",
     "slug": "FichaTecnica2",
-    "version": "22.0.0",
+    "version": "24.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -25,7 +25,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.nutriinterativa.fichatecnica",
-      "versionCode": 22,
+      "versionCode": 24,
       "permissions":["CAMERA","READ_EXTERNAL_STORAGE","WRITE_EXTERNAL_STORAGE"],
       "config": {
        
